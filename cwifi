@@ -1,0 +1,5 @@
+#!/bin/sh
+ssid[0]=$1
+pswd[1]=$2
+
+nmcli device wifi connect $ssid password $pswd

@@ -1,0 +1,15 @@
+#!/bin/sh
+
+
+#user="${users}"
+kernel=$(uname -r)
+ram=$(free -t | awk 'NR == 2 {printf("%.2f%"), $3/$2*100}')
+
+printf '%b' "
+ ~ fetch ~
+
+ $kernel
+ $ram
+
+ ~  end  ~
+"
