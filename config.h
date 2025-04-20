@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/XF86keysym.h>
+#include "themes/onedark.h"
+
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -11,11 +14,11 @@ static const int gappx		    = 10;	/* gaps between window */
 
 static const char *fonts[]          = { "JetBrainsMono Font:size=18" };
 static const char dmenufont[]       = "JetBrains Font:size=14";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+// static const char col_gray1[]       = "#222222";
+// static const char col_gray2[]       = "#444444";
+// static const char col_gray3[]       = "#bbbbbb";
+// static const char col_gray4[]       = "#eeeeee";
+// static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -64,7 +67,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *rofi[] = { "rofi", "-show", "drun", NULL };
-static const char *screenshot[] = { "/bin/sh", "-c", "main -s | xclip -selection clipboard -t image/png", NULL };
+static const char *screenshot[] = { "flameshot", "gui", NULL };
 
 
 /* Light */
@@ -79,12 +82,16 @@ static const char *mutevolume[]	    = { "amixer", "sset", "Master", "toggle",  N
 /* Poweroff */
 static const char *poweroff[] 	= {"poweroff", NULL};
 
+/* Reboot */
+static const char *reboot[] 	= {"reboot", NULL};
+
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,   			XK_d,      spawn,          {.v = rofi    } },
-	{ ControlMask,			XK_Print,  spawn,	   {.v = screenshot }},
+	{ 0,			XK_Print,  spawn,	   {.v = screenshot }},
 	
 
 	/* Light */
@@ -98,6 +105,9 @@ static const Key keys[] = {
 	/* Poweroff */
 
 	{ MODKEY,			XK_F4,				spawn, {.v = poweroff} },
+
+	/* Reboot */
+	{ MODKEY,			XK_F5,				spawn, {.v = reboot} },
 
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
